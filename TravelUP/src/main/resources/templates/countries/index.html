@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head}"></head>
+<body style="margin: 0; padding: 0; box-sizing: border-box; background: url('/images/countries.JPG') center/cover no-repeat fixed; color: white; font-family: 'Kodchasan', sans-serif;">
+<header th:replace="~{fragments :: header}"></header>
+<div id="admin-bar">
+    <div class="nav">
+
+    </div>
+</div>
+<main>
+    <h2 style="color: white; background-color: #003366; margin-bottom: 2em;">COUNTRIES</h2>
+
+    <!-- Search form -->
+    <form method="get" action="/countries" >
+        <input type="text" name="search" placeholder="Search by country name" />
+        <button type="submit" style="color: white; background-color: #003366; margin-bottom: 2em;">Search</button>
+    </form>
+
+
+    <p th:unless="${countries} and ${countries.size()}">
+        <em>No countries to display.</em>
+    </p>
+    <th:block th:if="${countries} and ${countries.size()}">
+        <table class="table table-striped" style="background-color: none;">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Country Name</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tr th:each="country : ${countries}">
+                <td th:text="${country.id}"></td>
+                <td th:text="${country.commonName}"></td>
+                <td><a th:href="${'/reviews?countryId=' + country.id}">View Reviews</a></td>
+            </tr>
+        </table>
+    </th:block>
+</main>
+</body>
+</html>

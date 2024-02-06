@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="~{fragments :: head}"></head>
+<body style="box-sizing: border-box; background-color: #f2f2f2; background: url('/images/vibes4.JPG') center/cover no-repeat fixed;">
+<header th:replace="~{fragments :: header}"></header>
+<div id="admin-bar">
+    <div class="nav">
+        <a class="navlink" href="/reviews">View List of Vibes</a>
+        <a class="navlink" href="/reviews/add">Add Vibe</a>
+    </div>
+</div>
+<main>
+    <form action='/reviews/delete' method='POST'>
+        <h3>Delete Vibe</h3>
+        <th:block th:each="review : ${reviews}">
+            <label>
+                <input type="checkbox" name="reviewIds" th:value="${review.id}" />
+                <span th:text="'Title: ' + ${review.title} + ', Country: ' + ${review.country.commonName} + ', City: ' + ${review.city}"></span>
+                <!-- implicitly calls toString() -->
+            </label><br />
+        </th:block>
+        <button class="delete" type='submit' style="background-color: #003366;">Delete Vibe</button>
+    </form>
+</main>
+</body>
+</html>

@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="~{fragments :: head}"></head>
+<body style="box-sizing: border-box; background-color: #f2f2f2; background: url('/images/vibes2.JPG') center/cover no-repeat fixed;">
+<header th:replace="~{fragments :: header}"></header>
+<div id="admin-bar">
+    <div class="nav">
+        <a class="navlink" href="/reviews/add">Add Vibe</a>
+        <a class="navlink" href="/reviews/delete">Delete Vibe</a>
+    </div>
+</div>
+<main>
+    <h2 style="color: white; background-color: #003366; margin-bottom: 2em;">VIBES</h2>
+    <p th:unless="${reviews} and ${reviews.size()}">
+        <em style="color: white;">No vibes to display.</em>
+    </p>
+    <div class="row">
+        <div th:each="review : ${reviews}" class="col-md-6 mb-4">
+            <!-- Make the square clickable with the added class -->
+            <a th:href="@{/reviews/details/{id}(id=${review.id})}" class="card card-link" style="background-color:none;">
+                <div class="card-body" style="background-color:none;">
+                    <h5 class="card-title" th:text="${review.title}" style="background-color:none;"></h5>
+                    <p class="card-text">
+                        City: <span th:text="${review.city}"></span><br>
+                        Country: <span th:text="${review.country.commonName}"></span><br>
+                        Rate:
+                        <span th:each="star : ${#numbers.sequence(1, review.rate)}" style="color: gold;">&#9733;</span>
+                    </p>
+                </div>
+            </a>
+        </div>
+    </div>
+</main>
+</body>
+</html>
+
+

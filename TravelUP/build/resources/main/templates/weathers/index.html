@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="~{fragments :: head}"></head>
+<body>
+<header th:replace="~{fragments :: header}"></header>
+<div id="admin-bar">
+    <div class="nav">
+        <a class="navlink" href="/weathers/add">Add Weather</a>
+    </div>
+</div>
+<main>
+    <h2>WEATHER</h2>
+    <p th:unless="${weathers} and ${weathers.size()}">
+        <em>No weather to display.</em>
+    </p>
+    <th:block th:if="${weathers} and ${weathers.size()}">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tr th:each="weather : ${weathers}">
+                <td th:text="${weather.id}"></td>
+                <td th:text="${weather.name}"></td>
+                <td><a th:href="${'/reviews?weatherId=' + weather.id}">View all Vibes for this type of weather</a></td>
+            </tr>
+        </table>
+    </th:block>
+</main>
+</body>
+</html>

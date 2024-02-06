@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="~{fragments :: head}"></head>
+<body>
+<header th:replace="~{fragments :: header}"></header>
+<div id="admin-bar">
+    <div class="nav">
+        <a class="navlink" href="/countries">View List of Countries</a>
+    </div>
+</div>
+<main>
+    <h3>Add Country</h3>
+    <form action='/countries/add' method='POST'>
+        <div class="form-item">
+            <label th:for="firstName">Country Name</label>
+            <input th:field="${country.commonName}" />
+            <p class="error" th:errors="${country.commonName}"></p>
+        </div>
+
+        <button type='submit'>Add Country</button>
+    </form>
+</main>
+</body>
+</html>

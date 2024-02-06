@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="~{fragments :: head}"></head>
+<body style="box-sizing: border-box; background-color: #f2f2f2; background: url('/images/vibes4.JPG') center/cover no-repeat fixed;">
+<header th:replace="~{fragments :: header}"></header>
+<div id="admin-bar">
+    <div class="nav">
+        <a class="navlink" href="/weathers">View List of weathers</a>
+    </div>
+</div>
+<main>
+    <h3>Add Weather</h3>
+    <form action='/weathers/add' method='POST'>
+        <div class="form-item">
+            <label>Name of Weather</label>
+            <input th:field="${weather.name}" />
+        </div>
+        <button type='submit' style="background-color: #003366;">Add Weather</button>
+    </form>
+</main>
+</body>
+</html>

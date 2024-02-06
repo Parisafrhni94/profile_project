@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="~{fragments :: head}"></head>
+<body style="box-sizing: border-box; background-color: #f2f2f2; background: url('/images/details2.JPG') center/cover no-repeat fixed;">
+<header th:replace="~{fragments :: header}"></header>
+<div id="admin-bar">
+    <div class="nav">
+        <a class="navlink" href="/reviews">View List of Vibes</a>
+        <a class="navlink" href="/reviews/add">Add Vibe</a>
+        <a class="navlink" href="/reviews/delete">Delete Vibe</a>
+    </div>
+</div>
+<main>
+    <h2 style="color: white; background-color: #003366; margin-bottom: 2em;">Vibe Details</h2>
+
+
+
+    <div class="container" style="background-color: none; /* Set a white background color for the container */
+            padding: 20px; /* Add padding to the container */
+            border-radius: 8px; /* Add rounded corners to the container */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;">
+        <div class="row">
+
+        </div>
+        <div class="row">
+            <div class="col">
+                <h5 th:text="${review.Title}" style="text-align: center; margin-bottom: 2em;"></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h5 >City</h5>
+                <p th:text="${review.city}" ></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h5>Weather</h5>
+                <!-- Iterate over the weather list in a single Review -->
+                <p th:if="${not #lists.isEmpty(review.weather)}">
+            <span th:each="weather, iterStat : ${review.weather}">
+                <span th:text="${weather.name}"></span>
+                <span th:if="${not iterStat.last}">, </span>
+            </span>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h5>Rate</h5>
+                <span th:each="star : ${#numbers.sequence(1, review.rate)}" style="color: gold; margin-bottom: 2em;">&#9733;</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h5>Vibe</h5>
+                <p th:text="${review.comment}"></p>
+            </div>
+        </div>
+    </div>
+    <!-- Add the "Update" button at the bottom centered -->
+    <div class="row">
+        <div class="col" style="text-align: center; margin-top: 1em;">
+            <a th:href="@{'/reviews/update/' + ${review.id}}" class="btn btn-primary">Update</a>
+        </div>
+    </div>
+
+
+
+</main>
+
+</body>
+</html>

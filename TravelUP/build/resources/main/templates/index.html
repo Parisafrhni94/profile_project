@@ -1,0 +1,33 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="~{fragments :: head}">
+
+
+</head>
+<body style="margin: 0; padding: 0; box-sizing: border-box; background: url('/images/world4.JPG') center/cover no-repeat fixed; color: white; font-family: 'Kodchasan', sans-serif;">
+<header th:replace="~{fragments :: header}"></header>
+<main>
+    <h2 th:text="${headingText}" style="color: white; background-color: none; text-align: center; margin-bottom: 2em;"></h2>
+
+
+
+    <div class="row">
+        <div th:each="review : ${topReviews}" class="col-md-6 mb-4">
+            <!-- Make the square clickable with the added class -->
+            <a th:href="@{/reviews/details/{id}(id=${review.id})}" class="card card-link">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${review.title}"></h5>
+                    <p class="card-text">
+                        City: <span th:text="${review.city}"></span><br>
+                        Country: <span th:text="${review.country.commonName}"></span><br>
+                        Rate:
+                        <span th:each="star : ${#numbers.sequence(1, review.rate)}" style="color: gold;">&#9733;</span>
+                    </p>
+                </div>
+            </a>
+        </div>
+    </div>
+</main>
+</body>
+</html>

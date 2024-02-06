@@ -1,0 +1,14 @@
+<!-- fragments/stars.html -->
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <style>
+        .star {
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+<span th:each="star : ${#numbers.sequence(1, #objects.nullSafe(review.rate), 1)}" class="star">&#9733;</span>
+</body>
+</html>
